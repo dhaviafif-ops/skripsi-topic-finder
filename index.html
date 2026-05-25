@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AI Skripsi Topic Finder</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🤖 AI Skripsi Topic Finder</h1>
+
+    <p class="subtitle">
+      Temukan ide skripsi menggunakan AI
+    </p>
+
+    <input
+      type="text"
+      id="major"
+      placeholder="Masukkan Jurusan">
+
+    <input
+      type="text"
+      id="interest"
+      placeholder="Masukkan Minat Penelitian">
+
+    <button onclick="generateTopic()">
+      Generate Topic
+    </button>
+
+    <div id="loading" class="loading">
+      AI sedang berpikir...
+    </div>
+
+  <div class="result-wrapper">
+
+  <div id="result" class="result-card"></div>
+
+  <button id="copyBtn" onclick="copyResult()">
+    Copy Hasil
+  </button>
+
+</div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
