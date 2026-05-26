@@ -18,8 +18,9 @@ async function generateTopic() {
 
     try {
 
-        const response = await fetch("https://skripsi-topic-finder-production.up.railway.app/")
-
+        const response = await fetch(
+            "https://skripsi-topic-finder-production.up.railway.app/generate",
+            {
                 method: "POST",
 
                 headers: {
