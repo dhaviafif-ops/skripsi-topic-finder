@@ -1,20 +1,13 @@
 async function generateTopic() {
 
-    const loading =
-        document.getElementById("loading");
-
-    const result =
-        document.getElementById("result");
+    const loading = document.getElementById("loading");
+    const result = document.getElementById("result");
 
     loading.style.display = "block";
-
     result.innerHTML = "";
 
-    const major =
-        document.getElementById("major").value;
-
-    const interest =
-        document.getElementById("interest").value;
+    const major = document.getElementById("major").value;
+    const interest = document.getElementById("interest").value;
 
     try {
 
@@ -22,16 +15,13 @@ async function generateTopic() {
             "https://skripsi-topic-finder-production.up.railway.app/generate",
             {
                 method: "POST",
-
                 headers: {
                     "Content-Type": "application/json"
                 },
-
                 body: JSON.stringify({
                     major: major,
                     interest: interest
                 })
-
             }
         );
 
@@ -54,8 +44,7 @@ async function generateTopic() {
 
 function copyResult() {
 
-    const text =
-        document.getElementById("result").innerText;
+    const text = document.getElementById("result").innerText;
 
     navigator.clipboard.writeText(text);
 
