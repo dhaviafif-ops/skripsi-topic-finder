@@ -151,3 +151,13 @@ button:hover {
         font-size: 24px;
     }
 }
+#result {
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.result-box {
+    overflow: hidden;
+}
