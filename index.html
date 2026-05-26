@@ -12,45 +12,27 @@
 
 <body>
 
-  <div class="container">
-
-    <h1>🤖 AI Skripsi Topic Finder</h1>
-
+<div class="container">
+    <h1>AI Skripsi Topic Finder</h1>
     <p class="subtitle">
-      Temukan ide skripsi menggunakan AI
+        Temukan ide skripsi terbaik dengan bantuan AI 🚀
     </p>
 
-    <input
-      type="text"
-      id="major"
-      placeholder="Masukkan Jurusan">
+    <div class="input-group">
+        <input type="text" id="jurusan" placeholder="Masukkan Jurusan">
+        
+        <input type="text" id="minat" placeholder="Masukkan Minat / Topik">
 
-    <input
-      type="text"
-      id="interest"
-      placeholder="Masukkan Minat Penelitian">
-
-    <button onclick="generateTopic()">
-      Generate Topic
-    </button>
-
-    <div id="loading" class="loading">
-      AI sedang berpikir...
+        <button onclick="generateTopic()">
+            Generate Topic
+        </button>
     </div>
 
-  <div class="result-wrapper">
-
-  <div id="result" class="result-card"></div>
-
-  <button id="copyBtn" onclick="copyResult()">
-    Copy Hasil
-  </button>
-
+    <div class="result-box">
+        <h2>📘 Hasil AI</h2>
+        <div id="result"></div>
+    </div>
 </div>
-
-  </div>
-
-  <script src="script.js"></script>
 
 </body>
 
