@@ -1,13 +1,11 @@
 async function generateTopic() {
 
-    const loading = document.getElementById("loading");
     const result = document.getElementById("result");
 
-    loading.style.display = "block";
-    result.innerHTML = "";
+    result.innerHTML = "Loading...";
 
-    const major = document.getElementById("major").value;
-    const interest = document.getElementById("interest").value;
+    const major = document.getElementById("jurusan").value;
+    const interest = document.getElementById("minat").value;
 
     try {
 
@@ -28,7 +26,6 @@ async function generateTopic() {
         const data = await response.json();
 
         result.innerHTML = `
-            <h2>📘 Hasil AI</h2>
             <pre>${data.result}</pre>
         `;
 
@@ -38,15 +35,4 @@ async function generateTopic() {
             "❌ Terjadi error saat mengambil data AI.";
 
     }
-
-    loading.style.display = "none";
-}
-
-function copyResult() {
-
-    const text = document.getElementById("result").innerText;
-
-    navigator.clipboard.writeText(text);
-
-    alert("Hasil berhasil dicopy!");
 }
