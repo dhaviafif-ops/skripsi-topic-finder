@@ -97,12 +97,14 @@ button:hover {
 
 /* RESULT BOX */
 .result-box {
+    width: 100%;
     margin-top: 35px;
     background: rgba(51, 65, 85, 0.8);
     border-radius: 18px;
     padding: 30px;
     border: 1px solid rgba(255,255,255,0.08);
-    overflow-x: auto;
+
+    overflow-x: hidden;
 }
 
 /* RESULT TITLE */
@@ -115,9 +117,14 @@ button:hover {
 /* AI RESULT TEXT */
 #result {
     white-space: pre-wrap;
-    line-height: 1.9;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+    line-height: 1.8;
     color: #f1f5f9;
     font-size: 15px;
+
+    width: 100%;
 }
 
 /* SCROLLBAR */
@@ -143,18 +150,4 @@ button:hover {
     .result-box h2 {
         font-size: 24px;
     }
-}
-#result {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    line-height: 1.8;
-    font-size: 15px;
-    color: #f1f5f9;
-}
-
-/* biar hasil ga melebar */
-.result-box {
-    width: 100%;
-    overflow-x: hidden;
 }
