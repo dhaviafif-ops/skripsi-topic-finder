@@ -144,3 +144,17 @@ button:hover {
         font-size: 24px;
     }
 }
+#result {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.8;
+    font-size: 15px;
+    color: #f1f5f9;
+}
+
+/* biar hasil ga melebar */
+.result-box {
+    width: 100%;
+    overflow-x: hidden;
+}
