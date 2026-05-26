@@ -2,7 +2,7 @@ async function generateTopic() {
 
     const result = document.getElementById("result");
 
-    result.innerHTML = "Loading...";
+    result.innerHTML = "⏳ Loading AI...";
 
     const major = document.getElementById("jurusan").value;
     const interest = document.getElementById("minat").value;
@@ -13,9 +13,11 @@ async function generateTopic() {
             "https://skripsi-topic-finder-production.up.railway.app/generate",
             {
                 method: "POST",
+
                 headers: {
                     "Content-Type": "application/json"
                 },
+
                 body: JSON.stringify({
                     major: major,
                     interest: interest
@@ -31,8 +33,10 @@ async function generateTopic() {
 
     } catch (error) {
 
+        console.error(error);
+
         result.innerHTML =
-            "❌ Terjadi error saat mengambil data AI.";
+            "❌ Backend Railway error / API tidak aktif.";
 
     }
 }
