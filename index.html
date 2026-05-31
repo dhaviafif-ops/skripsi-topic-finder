@@ -7,70 +7,73 @@
 
     <title>AI Research Assistant</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- Background Glow -->
-    <div class="blur blur1"></div>
-    <div class="blur blur2"></div>
+    <div class="background-blur"></div>
 
-    <div class="app">
+    <div class="container">
 
-        <!-- Header -->
+        <!-- HEADER -->
+
         <div class="header">
 
-            <div class="badge">
-                🚀 Powered by AI
+            <div class="logo">
+                🎓
             </div>
 
-            <h1>🎓 AI Research Assistant</h1>
+            <h1>AI Research Assistant</h1>
 
             <p class="subtitle">
-                Temukan Ide Skripsi Berkualitas dengan Bantuan Artificial Intelligence
+                Temukan Ide Skripsi Berkualitas dengan Bantuan AI
             </p>
 
-            <!-- Statistik -->
-            <div class="stats">
+        </div>
 
-                <div class="stat">
-                    <h3>100+</h3>
-                    <p>Topik AI</p>
-                </div>
+        <!-- STATS -->
 
-                <div class="stat">
-                    <h3>24/7</h3>
-                    <p>AI Assistant</p>
-                </div>
+        <div class="stats">
 
-                <div class="stat">
-                    <h3>10+</h3>
-                    <p>Metode Penelitian</p>
-                </div>
+            <div class="stat-card">
+                <h3>500+</h3>
+                <p>Ide Skripsi</p>
+            </div>
 
+            <div class="stat-card">
+                <h3>10+</h3>
+                <p>Metode Penelitian</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>24/7</h3>
+                <p>AI Assistant</p>
             </div>
 
         </div>
 
-        <!-- Form Input -->
-        <div class="search-box">
+        <!-- FORM -->
 
-            <input
-                type="text"
-                id="jurusan"
-                placeholder="📚 Masukkan Jurusan">
+        <div class="input-group">
 
-            <input
-                type="text"
-                id="minat"
-                placeholder="🔍 Masukkan Minat Penelitian">
+            <div class="input-wrapper">
+                <span>🎓</span>
+                <input
+                    type="text"
+                    id="jurusan"
+                    placeholder="Masukkan Jurusan">
+            </div>
+
+            <div class="input-wrapper">
+                <span>🔍</span>
+                <input
+                    type="text"
+                    id="minat"
+                    placeholder="Masukkan Minat Penelitian">
+            </div>
 
             <button onclick="generateTopic()">
                 🚀 Generate Topic
@@ -78,41 +81,52 @@
 
         </div>
 
-        <!-- Loading -->
+        <!-- LOADING -->
+
         <div id="loading" class="loading">
-
-            <div class="loader"></div>
-
-            AI sedang menganalisis topik penelitian...
-
+            🤖 AI sedang membuat rekomendasi...
         </div>
 
-        <!-- Hasil AI -->
-        <div class="chat-container">
+        <!-- RESULT -->
 
-            <div class="chat-header">
-                ✨ Hasil Analisis AI
+        <div class="result-box">
+
+            <div class="ai-header">
+
+                <div class="ai-avatar">
+                    🤖
+                </div>
+
+                <div>
+
+                    <h3>AI Research Assistant</h3>
+
+                    <span>
+                        Powered by AI
+                    </span>
+
+                </div>
+
             </div>
 
             <div id="result">
 
-                <p style="color:#94a3b8">
-                    Hasil rekomendasi topik skripsi akan muncul di sini...
-                </p>
+                <div class="welcome-card">
+
+                    <h2>✨ Selamat Datang</h2>
+
+                    <p>
+                        Masukkan jurusan dan minat penelitian Anda,
+                        lalu AI akan memberikan rekomendasi topik
+                        skripsi terbaik beserta research gap,
+                        metode penelitian, tools, dan tingkat kesulitannya.
+                    </p>
+
+                </div>
 
             </div>
 
         </div>
-
-        <!-- Tombol Copy -->
-        <button
-            id="copyBtn"
-            class="copy-btn"
-            onclick="copyResult()">
-
-            📋 Copy Hasil
-
-        </button>
 
     </div>
 
@@ -120,4 +134,4 @@
 
 </body>
 
-</html>
+</html>s

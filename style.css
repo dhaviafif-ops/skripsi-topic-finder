@@ -329,3 +329,165 @@ button:hover{
     }
 
 }
+/* ===== STATS ===== */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:35px;
+}
+
+.stat-card{
+    background:#1e293b;
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+}
+
+.stat-card h3{
+    font-size:28px;
+    margin-bottom:5px;
+    color:#10b981;
+}
+
+.stat-card p{
+    color:#94a3b8;
+}
+
+/* ===== INPUT ===== */
+
+.input-wrapper{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    background:#334155;
+
+    border-radius:16px;
+
+    padding:0 18px;
+
+    margin-bottom:18px;
+}
+
+.input-wrapper span{
+    font-size:20px;
+}
+
+.input-wrapper input{
+    margin-bottom:0;
+    background:transparent;
+}
+
+/* ===== AI HEADER ===== */
+
+.ai-header{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    margin-bottom:25px;
+}
+
+.ai-avatar{
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        #10b981,
+        #06b6d4
+    );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:24px;
+}
+
+.ai-header h3{
+    margin:0;
+}
+
+.ai-header span{
+    color:#94a3b8;
+    font-size:14px;
+}
+
+/* ===== WELCOME CARD ===== */
+
+.welcome-card{
+    background:#1e293b;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.welcome-card h2{
+    margin-bottom:15px;
+}
+
+.welcome-card p{
+    color:#cbd5e1;
+    line-height:1.8;
+}
+
+/* ===== RESULT STYLE ===== */
+
+#result{
+    font-family:'Inter',sans-serif;
+    font-size:17px;
+    line-height:2;
+    color:#e2e8f0;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:768px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+}
+.ai-message{
+    background:#111827;
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:20px;
+    padding:25px;
+}
+
+.message-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    font-size:20px;
+    font-weight:700;
+
+    margin-bottom:20px;
+
+    color:#10b981;
+}
+
+.message-content{
+    font-size:17px;
+    line-height:2.1;
+    color:#e5e7eb;
+}
+
+.message-content strong{
+    color:white;
+}
+
+.message-content br{
+    margin-bottom:10px;
+}
