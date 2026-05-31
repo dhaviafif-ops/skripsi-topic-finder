@@ -1,20 +1,37 @@
 async function generateTopic() {
 
-    const loading =
-        document.getElementById("loading");
+    const result = document.getElementById("result");
+    const loading = document.getElementById("loading");
 
-    const result =
-        document.getElementById("result");
+    const major = document.getElementById("jurusan").value.trim();
+    const interest = document.getElementById("minat").value.trim();
+
+    if (!major || !interest) {
+
+        result.innerHTML = `
+            <div class="welcome-card">
+                <h2>⚠️ Input Belum Lengkap</h2>
+                <p>
+                    Silakan isi jurusan dan minat penelitian terlebih dahulu.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
 
     loading.style.display = "block";
 
-    result.innerHTML = "";
-
-    const major =
-        document.getElementById("jurusan").value;
-
-    const interest =
-        document.getElementById("minat").value;
+    result.innerHTML = `
+        <div class="welcome-card">
+            <h2>🤖 AI Sedang Berpikir...</h2>
+            <p>
+                Menganalisis jurusan <b>${major}</b> dan minat penelitian
+                <b>${interest}</b>.
+                Mohon tunggu sebentar...
+            </p>
+        </div>
+    `;
 
     try {
 
@@ -22,40 +39,60 @@ async function generateTopic() {
             "https://skripsi-topic-finder-production.up.railway.app/generate",
             {
                 method: "POST",
-
                 headers: {
                     "Content-Type": "application/json"
                 },
-
                 body: JSON.stringify({
-                    major,
-                    interest
+                    major: major,
+                    interest: interest
                 })
             }
         );
 
-        const data =
-            await response.json();
+        if (!response.ok) {
+            throw new Error("Server Error");
+        }
+
+        const data = await response.json();
+
+        loading.style.display = "none";
 
         result.innerHTML = `
-<pre>${data.result}</pre>
-`;
+            <div class="ai-message">
+                <div class="message-header">
+                    ✨ Hasil Rekomendasi AI
+                </div>
+
+                <div class="message-content">
+                    ${formatResult(data.result)}
+                </div>
+            </div>
+        `;
 
     } catch (error) {
 
-        result.innerHTML =
-            "❌ Backend Railway error atau API tidak aktif.";
+        console.error(error);
 
+        loading.style.display = "none";
+
+        result.innerHTML = `
+            <div class="welcome-card">
+                <h2>❌ Terjadi Kesalahan</h2>
+                <p>
+                    Backend Railway tidak aktif atau terjadi masalah koneksi.
+                </p>
+            </div>
+        `;
     }
-
-    loading.style.display = "none";
 }
-function copyResult() {
 
-    const text =
-        document.getElementById("result").innerText;
+/* ==========================================
+   FORMAT HASIL AGAR LEBIH RAPI
+========================================== */
 
-    navigator.clipboard.writeText(text);
+function formatResult(text) {
 
-    alert("✅ Hasil berhasil disalin!");
+    return text
+        .replace(/\n/g, "<br>")
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 }
