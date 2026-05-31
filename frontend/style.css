@@ -181,15 +181,27 @@ button:hover{
 }
 
 #result{
+    font-family:'Inter',sans-serif;
+    font-size:17px;
+    font-weight:400;
+    line-height:2;
+
     color:#e2e8f0;
-    line-height:1.9;
+
     white-space:pre-wrap;
     word-break:break-word;
 }
 
 pre{
+    font-family:'Inter',sans-serif;
+    font-size:17px;
+    font-weight:400;
+    line-height:2;
+
     white-space:pre-wrap;
     word-break:break-word;
+
+    color:#f8fafc;
 }
 
 ::-webkit-scrollbar{
