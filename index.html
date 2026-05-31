@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,56 +8,116 @@
     <title>AI Research Assistant</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="app">
+    <!-- Background Glow -->
+    <div class="blur blur1"></div>
+    <div class="blur blur2"></div>
 
-    <div class="header">
-        <h1>🎓 AI Research Assistant</h1>
-        <p>Temukan ide skripsi berkualitas dengan bantuan AI</p>
-    </div>
+    <div class="app">
 
-    <div class="search-box">
+        <!-- Header -->
+        <div class="header">
 
-        <input
-            type="text"
-            id="jurusan"
-            placeholder="Masukkan Jurusan"
-        >
+            <div class="badge">
+                🚀 Powered by AI
+            </div>
 
-        <input
-            type="text"
-            id="minat"
-            placeholder="Masukkan Minat Penelitian"
-        >
+            <h1>🎓 AI Research Assistant</h1>
 
-        <button onclick="generateTopic()">
-            Generate Topic
+            <p class="subtitle">
+                Temukan Ide Skripsi Berkualitas dengan Bantuan Artificial Intelligence
+            </p>
+
+            <!-- Statistik -->
+            <div class="stats">
+
+                <div class="stat">
+                    <h3>100+</h3>
+                    <p>Topik AI</p>
+                </div>
+
+                <div class="stat">
+                    <h3>24/7</h3>
+                    <p>AI Assistant</p>
+                </div>
+
+                <div class="stat">
+                    <h3>10+</h3>
+                    <p>Metode Penelitian</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Form Input -->
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="jurusan"
+                placeholder="📚 Masukkan Jurusan">
+
+            <input
+                type="text"
+                id="minat"
+                placeholder="🔍 Masukkan Minat Penelitian">
+
+            <button onclick="generateTopic()">
+                🚀 Generate Topic
+            </button>
+
+        </div>
+
+        <!-- Loading -->
+        <div id="loading" class="loading">
+
+            <div class="loader"></div>
+
+            AI sedang menganalisis topik penelitian...
+
+        </div>
+
+        <!-- Hasil AI -->
+        <div class="chat-container">
+
+            <div class="chat-header">
+                ✨ Hasil Analisis AI
+            </div>
+
+            <div id="result">
+
+                <p style="color:#94a3b8">
+                    Hasil rekomendasi topik skripsi akan muncul di sini...
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Tombol Copy -->
+        <button
+            id="copyBtn"
+            class="copy-btn"
+            onclick="copyResult()">
+
+            📋 Copy Hasil
+
         </button>
 
     </div>
 
-    <div id="loading">
-        AI sedang menganalisis...
-    </div>
-
-    <div class="chat-container">
-
-        <div class="chat-header">
-            ✨ Hasil AI
-        </div>
-
-        <div id="result"></div>
-
-    </div>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
