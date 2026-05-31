@@ -14,114 +14,156 @@
 
 <body>
 
-    <div class="blur blur1"></div>
-    <div class="blur blur2"></div>
+    <!-- BACKGROUND -->
 
-    <div class="container">
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
 
-        <div class="hero">
+    <!-- APP -->
+
+    <div class="app">
+
+        <!-- NAVBAR -->
+
+        <nav>
+
+            <div class="logo">
+                🚀 AI Research
+            </div>
+
+            <div class="nav-right">
+
+                <span class="online">
+                    ● AI Online
+                </span>
+
+            </div>
+
+        </nav>
+
+        <!-- HERO -->
+
+        <section class="hero">
 
             <div class="badge">
-                ✨ AI Powered Research Assistant
+                ✨ Powered By Artificial Intelligence
             </div>
 
             <h1>
-                Temukan Judul Skripsi
-                <span>Dalam Hitungan Detik</span>
+                Temukan Ide Skripsi
+                <span>Dalam Sekejap</span>
             </h1>
 
             <p>
-                Gunakan AI untuk menemukan ide skripsi, research gap,
-                metode penelitian, dan tools yang relevan.
+                Gunakan AI untuk menemukan topik skripsi,
+                research gap, metode penelitian,
+                dan rekomendasi teknologi terkini.
             </p>
 
-        </div>
+        </section>
 
-        <div class="features">
+        <!-- STATS -->
 
-            <div class="feature-card">
-                🎓
-                <h3>Ide Skripsi</h3>
-                <p>Topik terbaru dan relevan</p>
+        <section class="stats">
+
+            <div class="card stat-card">
+                <h2>100+</h2>
+                <p>Topik Skripsi</p>
             </div>
 
-            <div class="feature-card">
-                📊
-                <h3>Research Gap</h3>
-                <p>Analisis penelitian sebelumnya</p>
+            <div class="card stat-card">
+                <h2>24/7</h2>
+                <p>AI Assistant</p>
             </div>
 
-            <div class="feature-card">
-                🤖
-                <h3>AI Powered</h3>
-                <p>Didukung Artificial Intelligence</p>
+            <div class="card stat-card">
+                <h2>AI</h2>
+                <p>Research Engine</p>
             </div>
 
-        </div>
+        </section>
 
-        <div class="search-box">
+        <!-- FORM -->
 
-            <div class="input-wrapper">
-                <span>🎓</span>
-                <input
-                    type="text"
-                    id="jurusan"
-                    placeholder="Masukkan Jurusan">
+        <section class="generator">
+
+            <div class="card glass">
+
+                <h2>🎓 Generate Topik Skripsi</h2>
+
+                <div class="input-box">
+                    <input
+                        type="text"
+                        id="jurusan"
+                        placeholder="Masukkan Jurusan">
+                </div>
+
+                <div class="input-box">
+                    <input
+                        type="text"
+                        id="minat"
+                        placeholder="Masukkan Minat Penelitian">
+                </div>
+
+                <button onclick="generateTopic()">
+                    🚀 Generate Topic
+                </button>
+
             </div>
 
-            <div class="input-wrapper">
-                <span>🔍</span>
-                <input
-                    type="text"
-                    id="minat"
-                    placeholder="Masukkan Minat Penelitian">
-            </div>
+        </section>
 
-            <button onclick="generateTopic()">
-                🚀 Generate Topic
-            </button>
-
-        </div>
+        <!-- LOADING -->
 
         <div id="loading" class="loading">
 
-            <div class="loader-bar"></div>
+            <div class="loader"></div>
 
             <p>AI sedang menganalisis...</p>
 
         </div>
 
-        <div class="result-box">
+        <!-- RESULT -->
 
-            <div class="ai-header">
+        <section class="result-section">
 
-                <div class="ai-avatar">
-                    🤖
+            <div class="card result-card">
+
+                <div class="result-header">
+
+                    <div class="avatar">
+                        🤖
+                    </div>
+
+                    <div>
+
+                        <h3>AI Research Assistant</h3>
+
+                        <span>Ready</span>
+
+                    </div>
+
                 </div>
 
-                <div>
-                    <h3>Research AI</h3>
-                    <span>Online</span>
+                <div id="result">
+
+                    <div class="welcome-box">
+
+                        <h2>👋 Selamat Datang</h2>
+
+                        <p>
+                            Masukkan jurusan dan minat penelitian
+                            untuk mendapatkan rekomendasi topik skripsi
+                            berbasis AI.
+                        </p>
+
+                    </div>
+
                 </div>
 
             </div>
 
-            <div id="result">
-
-                <div class="welcome-card">
-
-                    <h2>👋 Selamat Datang</h2>
-
-                    <p>
-                        Masukkan jurusan dan minat penelitian
-                        untuk mendapatkan rekomendasi topik skripsi.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
+        </section>
 
     </div>
 

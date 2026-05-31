@@ -1,29 +1,26 @@
 async function generateTopic() {
 
-    const result =
-        document.getElementById("result");
+    const result = document.getElementById("result");
+    const loading = document.getElementById("loading");
 
-    const loading =
-        document.getElementById("loading");
-
-    const major =
-        document.getElementById("jurusan").value;
-
-    const interest =
-        document.getElementById("minat").value;
+    const major = document.getElementById("jurusan").value.trim();
+    const interest = document.getElementById("minat").value.trim();
 
     if (!major || !interest) {
-
-        alert("Isi jurusan dan minat penelitian terlebih dahulu.");
-
+        result.innerHTML = `
+            <div class="welcome-box">
+                ⚠️ Isi jurusan dan minat terlebih dahulu
+            </div>
+        `;
         return;
     }
 
+    // show loading
     loading.style.display = "block";
 
     result.innerHTML = `
-        <div class="welcome-card">
-            🤖 AI sedang menganalisis data...
+        <div class="welcome-box">
+            🤖 AI sedang menganalisis topik...
         </div>
     `;
 
@@ -33,11 +30,9 @@ async function generateTopic() {
             "https://skripsi-topic-finder-production.up.railway.app/generate",
             {
                 method: "POST",
-
                 headers: {
                     "Content-Type": "application/json"
                 },
-
                 body: JSON.stringify({
                     major: major,
                     interest: interest
@@ -45,56 +40,48 @@ async function generateTopic() {
             }
         );
 
-        const data =
-            await response.json();
+        const data = await response.json();
 
         loading.style.display = "none";
 
-        typeWriter(
-            data.result,
-            result
-        );
+        // typing effect result
+        typeWriter(data.result, result);
 
     } catch (error) {
 
         loading.style.display = "none";
 
         result.innerHTML = `
-            <div class="welcome-card">
-                ❌ Backend Railway tidak aktif.
+            <div class="welcome-box">
+                ❌ Server Railway tidak aktif / error koneksi
             </div>
         `;
     }
 }
 
+
+/* =========================
+   TYPEWRITER EFFECT (CHATGPT STYLE)
+========================= */
+
 function typeWriter(text, element) {
 
-    element.innerHTML = `
-        <div class="ai-message">
-            <div id="typing"></div>
-        </div>
-    `;
+    element.innerHTML = `<div class="typing-box"></div>`;
 
-    const target =
-        document.getElementById("typing");
+    const target = element.querySelector(".typing-box");
 
     let i = 0;
-
-    const speed = 15;
+    const speed = 12;
 
     function typing() {
 
         if (i < text.length) {
 
-            target.innerHTML +=
-                text.charAt(i);
+            target.innerHTML += text.charAt(i);
 
             i++;
 
-            setTimeout(
-                typing,
-                speed
-            );
+            setTimeout(typing, speed);
         }
     }
 
