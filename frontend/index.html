@@ -6,63 +6,57 @@
 
     <title>AI Research Assistant</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="background-blur"></div>
+<div class="app">
 
-    <div class="container">
+    <div class="header">
+        <h1>🎓 AI Research Assistant</h1>
+        <p>Temukan ide skripsi berkualitas dengan bantuan AI</p>
+    </div>
 
-        <div class="header">
+    <div class="search-box">
 
-            <div class="logo">
-                🎓
-            </div>
+        <input
+            type="text"
+            id="jurusan"
+            placeholder="Masukkan Jurusan"
+        >
 
-            <h1>AI Research Assistant</h1>
+        <input
+            type="text"
+            id="minat"
+            placeholder="Masukkan Minat Penelitian"
+        >
 
-            <p class="subtitle">
-                Temukan Ide Skripsi Berkualitas dengan Bantuan AI
-            </p>
-
-        </div>
-
-        <div class="input-group">
-
-            <input
-                type="text"
-                id="jurusan"
-                placeholder="📚 Masukkan Jurusan"
-            >
-
-            <input
-                type="text"
-                id="minat"
-                placeholder="🔍 Masukkan Minat Penelitian"
-            >
-
-            <button onclick="generateTopic()">
-                Generate Topic
-            </button>
-
-        </div>
-
-        <div id="loading" class="loading">
-            🤖 AI sedang menganalisis...
-        </div>
-
-        <div class="result-box">
-
-            <h2>✨ Rekomendasi Topik Skripsi</h2>
-
-            <div id="result"></div>
-
-        </div>
+        <button onclick="generateTopic()">
+            Generate Topic
+        </button>
 
     </div>
 
-    <script src="script.js"></script>
+    <div id="loading">
+        AI sedang menganalisis...
+    </div>
+
+    <div class="chat-container">
+
+        <div class="chat-header">
+            ✨ Hasil AI
+        </div>
+
+        <div id="result"></div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
