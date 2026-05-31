@@ -1,21 +1,20 @@
 async function generateTopic() {
 
-    const result = document.getElementById("result");
-    const loading = document.getElementById("loading");
+    const result =
+        document.getElementById("result");
 
-    const major = document.getElementById("jurusan").value.trim();
-    const interest = document.getElementById("minat").value.trim();
+    const loading =
+        document.getElementById("loading");
+
+    const major =
+        document.getElementById("jurusan").value;
+
+    const interest =
+        document.getElementById("minat").value;
 
     if (!major || !interest) {
 
-        result.innerHTML = `
-            <div class="welcome-card">
-                <h2>⚠️ Input Belum Lengkap</h2>
-                <p>
-                    Silakan isi jurusan dan minat penelitian terlebih dahulu.
-                </p>
-            </div>
-        `;
+        alert("Isi jurusan dan minat penelitian terlebih dahulu.");
 
         return;
     }
@@ -24,12 +23,7 @@ async function generateTopic() {
 
     result.innerHTML = `
         <div class="welcome-card">
-            <h2>🤖 AI Sedang Berpikir...</h2>
-            <p>
-                Menganalisis jurusan <b>${major}</b> dan minat penelitian
-                <b>${interest}</b>.
-                Mohon tunggu sebentar...
-            </p>
+            🤖 AI sedang menganalisis data...
         </div>
     `;
 
@@ -39,9 +33,11 @@ async function generateTopic() {
             "https://skripsi-topic-finder-production.up.railway.app/generate",
             {
                 method: "POST",
+
                 headers: {
                     "Content-Type": "application/json"
                 },
+
                 body: JSON.stringify({
                     major: major,
                     interest: interest
@@ -49,50 +45,58 @@ async function generateTopic() {
             }
         );
 
-        if (!response.ok) {
-            throw new Error("Server Error");
-        }
-
-        const data = await response.json();
+        const data =
+            await response.json();
 
         loading.style.display = "none";
 
-        result.innerHTML = `
-            <div class="ai-message">
-                <div class="message-header">
-                    ✨ Hasil Rekomendasi AI
-                </div>
-
-                <div class="message-content">
-                    ${formatResult(data.result)}
-                </div>
-            </div>
-        `;
+        typeWriter(
+            data.result,
+            result
+        );
 
     } catch (error) {
-
-        console.error(error);
 
         loading.style.display = "none";
 
         result.innerHTML = `
             <div class="welcome-card">
-                <h2>❌ Terjadi Kesalahan</h2>
-                <p>
-                    Backend Railway tidak aktif atau terjadi masalah koneksi.
-                </p>
+                ❌ Backend Railway tidak aktif.
             </div>
         `;
     }
 }
 
-/* ==========================================
-   FORMAT HASIL AGAR LEBIH RAPI
-========================================== */
+function typeWriter(text, element) {
 
-function formatResult(text) {
+    element.innerHTML = `
+        <div class="ai-message">
+            <div id="typing"></div>
+        </div>
+    `;
 
-    return text
-        .replace(/\n/g, "<br>")
-        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    const target =
+        document.getElementById("typing");
+
+    let i = 0;
+
+    const speed = 15;
+
+    function typing() {
+
+        if (i < text.length) {
+
+            target.innerHTML +=
+                text.charAt(i);
+
+            i++;
+
+            setTimeout(
+                typing,
+                speed
+            );
+        }
+    }
+
+    typing();
 }

@@ -9,55 +9,57 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <div class="background-blur"></div>
+    <div class="blur blur1"></div>
+    <div class="blur blur2"></div>
 
     <div class="container">
 
-        <!-- HEADER -->
+        <div class="hero">
 
-        <div class="header">
-
-            <div class="logo">
-                🎓
+            <div class="badge">
+                ✨ AI Powered Research Assistant
             </div>
 
-            <h1>AI Research Assistant</h1>
+            <h1>
+                Temukan Judul Skripsi
+                <span>Dalam Hitungan Detik</span>
+            </h1>
 
-            <p class="subtitle">
-                Temukan Ide Skripsi Berkualitas dengan Bantuan AI
+            <p>
+                Gunakan AI untuk menemukan ide skripsi, research gap,
+                metode penelitian, dan tools yang relevan.
             </p>
 
         </div>
 
-        <!-- STATS -->
+        <div class="features">
 
-        <div class="stats">
-
-            <div class="stat-card">
-                <h3>500+</h3>
-                <p>Ide Skripsi</p>
+            <div class="feature-card">
+                🎓
+                <h3>Ide Skripsi</h3>
+                <p>Topik terbaru dan relevan</p>
             </div>
 
-            <div class="stat-card">
-                <h3>10+</h3>
-                <p>Metode Penelitian</p>
+            <div class="feature-card">
+                📊
+                <h3>Research Gap</h3>
+                <p>Analisis penelitian sebelumnya</p>
             </div>
 
-            <div class="stat-card">
-                <h3>24/7</h3>
-                <p>AI Assistant</p>
+            <div class="feature-card">
+                🤖
+                <h3>AI Powered</h3>
+                <p>Didukung Artificial Intelligence</p>
             </div>
 
         </div>
 
-        <!-- FORM -->
-
-        <div class="input-group">
+        <div class="search-box">
 
             <div class="input-wrapper">
                 <span>🎓</span>
@@ -81,13 +83,13 @@
 
         </div>
 
-        <!-- LOADING -->
-
         <div id="loading" class="loading">
-            🤖 AI sedang membuat rekomendasi...
-        </div>
 
-        <!-- RESULT -->
+            <div class="loader-bar"></div>
+
+            <p>AI sedang menganalisis...</p>
+
+        </div>
 
         <div class="result-box">
 
@@ -98,13 +100,8 @@
                 </div>
 
                 <div>
-
-                    <h3>AI Research Assistant</h3>
-
-                    <span>
-                        Powered by AI
-                    </span>
-
+                    <h3>Research AI</h3>
+                    <span>Online</span>
                 </div>
 
             </div>
@@ -113,13 +110,11 @@
 
                 <div class="welcome-card">
 
-                    <h2>✨ Selamat Datang</h2>
+                    <h2>👋 Selamat Datang</h2>
 
                     <p>
-                        Masukkan jurusan dan minat penelitian Anda,
-                        lalu AI akan memberikan rekomendasi topik
-                        skripsi terbaik beserta research gap,
-                        metode penelitian, tools, dan tingkat kesulitannya.
+                        Masukkan jurusan dan minat penelitian
+                        untuk mendapatkan rekomendasi topik skripsi.
                     </p>
 
                 </div>
@@ -134,4 +129,4 @@
 
 </body>
 
-</html>s
+</html>
