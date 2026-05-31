@@ -1,59 +1,68 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>AI Skripsi Topic Finder</title>
+    <title>AI Research Assistant</title>
 
-  <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <div class="container">
+    <div class="background-blur"></div>
 
-    <h1>🎓 AI Research Assistant</h1>
-    <p class="subtitle">
-    Temukan Ide Skripsi Berkualitas dengan Bantuan AI
-    </p>
+    <div class="container">
 
-    <div class="input-group">
+        <div class="header">
 
-      <input
-        type="text"
-        id="jurusan"
-        placeholder="Masukkan Jurusan"
-      />
+            <div class="logo">
+                🎓
+            </div>
 
-      <input
-        type="text"
-        id="minat"
-        placeholder="Masukkan Minat Penelitian"
-      />
+            <h1>AI Research Assistant</h1>
 
-      <button onclick="generateTopic()">
-        Generate Topic
-      </button>
+            <p class="subtitle">
+                Temukan Ide Skripsi Berkualitas dengan Bantuan AI
+            </p>
+
+        </div>
+
+        <div class="input-group">
+
+            <input
+                type="text"
+                id="jurusan"
+                placeholder="📚 Masukkan Jurusan"
+            >
+
+            <input
+                type="text"
+                id="minat"
+                placeholder="🔍 Masukkan Minat Penelitian"
+            >
+
+            <button onclick="generateTopic()">
+                Generate Topic
+            </button>
+
+        </div>
+
+        <div id="loading" class="loading">
+            🤖 AI sedang menganalisis...
+        </div>
+
+        <div class="result-box">
+
+            <h2>✨ Rekomendasi Topik Skripsi</h2>
+
+            <div id="result"></div>
+
+        </div>
 
     </div>
 
-    <div class="result-box">
-
-      <h2>✨ Rekomendasi Topik Skripsi</h2>
-
-      <div id="result"></div>
-
-    </div>
-
-  </div>
-
-  <script src="./script.js"></script>
+    <script src="script.js"></script>
 
 </body>
-
 </html>

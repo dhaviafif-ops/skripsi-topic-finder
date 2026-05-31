@@ -1,11 +1,26 @@
 async function generateTopic() {
 
     const result = document.getElementById("result");
+    const loading = document.getElementById("loading");
+    const button = document.querySelector("button");
 
-    result.innerHTML = "⏳ Loading AI...";
+    const major = document.getElementById("jurusan").value.trim();
+    const interest = document.getElementById("minat").value.trim();
 
-    const major = document.getElementById("jurusan").value;
-    const interest = document.getElementById("minat").value;
+    if (!major || !interest) {
+        result.innerHTML = `
+            <div class="error">
+                ⚠️ Silakan isi Jurusan dan Minat Penelitian terlebih dahulu.
+            </div>
+        `;
+        return;
+    }
+
+    loading.style.display = "block";
+    button.disabled = true;
+    button.innerHTML = "⏳ Generating...";
+
+    result.innerHTML = "";
 
     try {
 
@@ -13,11 +28,9 @@ async function generateTopic() {
             "https://skripsi-topic-finder-production.up.railway.app/generate",
             {
                 method: "POST",
-
                 headers: {
                     "Content-Type": "application/json"
                 },
-
                 body: JSON.stringify({
                     major: major,
                     interest: interest
@@ -25,18 +38,33 @@ async function generateTopic() {
             }
         );
 
+        if (!response.ok) {
+            throw new Error("Server Error");
+        }
+
         const data = await response.json();
 
         result.innerHTML = `
-            <pre>${data.result}</pre>
+            <div class="ai-result">
+                <pre>${data.result}</pre>
+            </div>
         `;
 
     } catch (error) {
 
         console.error(error);
 
-        result.innerHTML =
-            "❌ Backend Railway error / API tidak aktif.";
+        result.innerHTML = `
+            <div class="error">
+                ❌ Backend Railway sedang offline atau terjadi kesalahan koneksi.
+            </div>
+        `;
 
+    } finally {
+
+        loading.style.display = "none";
+
+        button.disabled = false;
+        button.innerHTML = "🚀 Generate Topic";
     }
 }
