@@ -50,3 +50,12 @@ async function generateTopic() {
 
     loading.style.display = "none";
 }
+function copyResult() {
+
+    const text =
+        document.getElementById("result").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("✅ Hasil berhasil disalin!");
+}
