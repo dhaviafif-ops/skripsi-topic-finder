@@ -49,5 +49,5 @@ python app.py
 
 ## Author
 
-Dihandra Dwi Andika
+Dihandra Dwi Andika &
 Dhavi Rachmatul Afif
