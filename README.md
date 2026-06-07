@@ -50,3 +50,4 @@ python app.py
 ## Author
 
 Dihandra Dwi Andika
+Dhavi Rachmatul Afif
