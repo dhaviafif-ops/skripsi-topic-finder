@@ -1,4 +1,4 @@
-# skripsi-topic-finder
+
 # Skripsi Topic Finder
 
 AI-powered Skripsi Topic Finder menggunakan:
