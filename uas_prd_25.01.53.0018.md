@@ -104,3 +104,4 @@ Validasi dilakukan di sisi frontend (sebelum submit) **dan** di sisi backend (Fa
 ---
 
 *Dokumen ini disusun sebagai pemenuhan Tugas UAS mata kuliah Pengembangan Aplikasi Berbasis AI, Universitas Stikubank Semarang.*
+https://github.com/dhaviafif-ops/skripsi-topic-finder/blob/main/uas_prd_25.01.53.0018.md
