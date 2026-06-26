@@ -1,5 +1,6 @@
 
 # Skripsi Topic Finder
+https://dhaviafif-ops.github.io/skripsi-topic-finder/frontend/
 
 AI-powered Skripsi Topic Finder menggunakan:
 
