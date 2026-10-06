@@ -4,6 +4,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
 body{
@@ -13,10 +14,7 @@ body{
     overflow-x:hidden;
 }
 
-/* =========================
-   BACKGROUND FUTURISTIC
-========================= */
-
+/* BACKGROUND */
 .bg-gradient{
     position:fixed;
     inset:0;
@@ -38,63 +36,54 @@ body{
     z-index:-1;
 }
 
-/* =========================
-   APP CONTAINER
-========================= */
-
+/* APP CONTAINER - mobile first */
 .app{
+    width:100%;
     max-width:1150px;
     margin:auto;
-    padding:30px 20px 80px;
+    padding:20px 16px 60px;
 }
 
-/* =========================
-   NAVBAR
-========================= */
-
+/* NAVBAR */
 nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:15px 0 40px;
+    padding:10px 0 24px;
 }
 
 .logo{
     font-weight:800;
-    font-size:20px;
-    letter-spacing:.5px;
+    font-size:18px;
 }
 
 .online{
     color:#10b981;
     font-weight:600;
-    font-size:14px;
+    font-size:13px;
 }
 
-/* =========================
-   HERO SECTION
-========================= */
-
+/* HERO */
 .hero{
     text-align:center;
-    margin-bottom:60px;
+    margin-bottom:30px;
 }
 
 .badge{
     display:inline-block;
-    padding:10px 18px;
+    padding:8px 16px;
     border-radius:999px;
     background:rgba(16,185,129,.12);
     color:#10b981;
-    font-size:13px;
-    margin-bottom:20px;
+    font-size:12px;
+    margin-bottom:16px;
     border:1px solid rgba(16,185,129,.2);
 }
 
 .hero h1{
-    font-size:4rem;
+    font-size:2rem;
     font-weight:900;
-    line-height:1.1;
+    line-height:1.2;
 }
 
 .hero h1 span{
@@ -105,82 +94,71 @@ nav{
 }
 
 .hero p{
-    margin-top:18px;
+    margin-top:14px;
     color:#94a3b8;
-    font-size:1.1rem;
+    font-size:.95rem;
     max-width:650px;
     margin-inline:auto;
 }
 
-/* =========================
-   GLASS CARDS
-========================= */
-
+/* CARDS */
 .card{
     background:rgba(255,255,255,.04);
     border:1px solid rgba(255,255,255,.08);
     backdrop-filter:blur(20px);
-    border-radius:22px;
+    border-radius:20px;
 }
 
-/* =========================
-   STATS
-========================= */
-
+/* STATS */
 .stats{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:15px;
-    margin-bottom:50px;
+    gap:10px;
+    margin-bottom:24px;
 }
 
 .stat-card{
     text-align:center;
-    padding:25px;
+    padding:16px 8px;
     transition:.3s;
 }
 
-.stat-card:hover{
-    transform:translateY(-6px);
-}
-
 .stat-card h2{
-    font-size:2rem;
+    font-size:1.4rem;
     color:#10b981;
 }
 
 .stat-card p{
     color:#94a3b8;
+    font-size:.8rem;
 }
 
-/* =========================
-   INPUT SECTION
-========================= */
-
+/* FORM */
 .generator{
-    margin-bottom:30px;
-}
-
-.glass{
-    padding:30px;
-}
-
-.glass h2{
     margin-bottom:20px;
 }
 
+.glass{
+    padding:20px;
+}
+
+.glass h2{
+    margin-bottom:16px;
+    font-size:1.2rem;
+}
+
 .input-box{
-    margin-bottom:15px;
+    margin-bottom:12px;
 }
 
 input{
     width:100%;
-    padding:16px 18px;
+    padding:16px;
     border-radius:14px;
     border:none;
     background:rgba(51,65,85,.6);
     color:white;
-    font-size:15px;
+    font-size:16px; /* 16px mencegah auto-zoom di iOS */
     outline:none;
 }
 
@@ -199,17 +177,19 @@ button{
     font-weight:700;
     cursor:pointer;
     transition:.3s;
+    touch-action:manipulation;
 }
 
-button:hover{
-    transform:translateY(-3px);
-    box-shadow:0 15px 40px rgba(16,185,129,.25);
+button:active{
+    transform:scale(.98);
 }
 
-/* =========================
-   LOADING
-========================= */
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
 
+/* LOADING */
 .loading{
     display:none;
     text-align:center;
@@ -230,61 +210,57 @@ button:hover{
     100%{ transform:rotate(360deg); }
 }
 
-/* =========================
-   RESULT BOX
-========================= */
-
+/* RESULT */
 .result-section{
-    margin-top:20px;
+    margin-top:10px;
 }
 
 .result-card{
-    padding:25px;
+    padding:20px;
 }
 
 .result-header{
     display:flex;
     align-items:center;
-    gap:15px;
-    margin-bottom:20px;
+    gap:12px;
+    margin-bottom:16px;
 }
 
 .avatar{
-    width:50px;
-    height:50px;
+    width:46px;
+    height:46px;
     border-radius:50%;
     background:linear-gradient(135deg,#10b981,#3b82f6);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:22px;
+    font-size:20px;
 }
 
 #result{
-    font-size:16px;
-    line-height:2;
+    font-size:15px;
+    line-height:1.9;
     color:#e2e8f0;
-    white-space:pre-wrap;
 }
 
-/* =========================
-   WELCOME BOX
-========================= */
-
 .welcome-box{
-    background:rgba(255,255,255,.03);
-    padding:20px;
+    background:rgba(255,255,255,.04);
+    padding:18px;
     border-radius:16px;
-    border:1px solid rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
 }
 
 .welcome-box h2{
     margin-bottom:10px;
+    font-size:1.2rem;
 }
 
-/* =========================
-   SCROLLBAR
-========================= */
+.typing-box{
+    white-space:pre-wrap;
+    line-height:1.9;
+    font-size:15px;
+    color:#e2e8f0;
+}
 
 ::-webkit-scrollbar{
     width:8px;
@@ -295,31 +271,51 @@ button:hover{
     border-radius:10px;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* DESKTOP */
+@media(min-width:768px){
 
-@media(max-width:768px){
+    .app{
+        padding:30px 20px 80px;
+    }
 
     .hero h1{
-        font-size:2.4rem;
+        font-size:4rem;
+    }
+
+    .hero p{
+        font-size:1.1rem;
     }
 
     .stats{
-        grid-template-columns:1fr;
+        gap:15px;
     }
 
-}
-.typing-box{
-    white-space:pre-wrap;
-    line-height:2;
-    font-size:16px;
-    color:#e2e8f0;
-}
+    .stat-card{
+        padding:25px;
+    }
 
-.welcome-box{
-    background:rgba(255,255,255,.04);
-    padding:20px;
-    border-radius:16px;
-    border:1px solid rgba(255,255,255,.08);
+    .stat-card h2{
+        font-size:2rem;
+    }
+
+    .stat-card p{
+        font-size:1rem;
+    }
+
+    .glass{
+        padding:30px;
+    }
+
+    .glass h2{
+        font-size:1.5rem;
+    }
+
+    button:hover{
+        transform:translateY(-3px);
+        box-shadow:0 15px 40px rgba(16,185,129,.25);
+    }
+
+    .stat-card:hover{
+        transform:translateY(-6px);
+    }
 }
