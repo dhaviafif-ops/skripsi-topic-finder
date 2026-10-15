@@ -1,3 +1,13 @@
+// Ganti PROD_API dengan URL backend setelah deploy (Render/Railway/hosting lain)
+const PROD_API = "https://skripsi-topic-finder-production.up.railway.app";
+
+// Otomatis pilih backend: dibuka lokal -> localhost, dibuka online -> PROD_API
+const API_BASE =
+    location.protocol === "file:" ||
+    ["localhost", "127.0.0.1"].includes(location.hostname)
+        ? "http://127.0.0.1:5000"
+        : PROD_API;
+
 async function generateTopic() {
 
     const result = document.getElementById("result");
@@ -31,7 +41,7 @@ async function generateTopic() {
     try {
 
         const response = await fetch(
-            "https://skripsi-topic-finder-production.up.railway.app/generate",
+            `${API_BASE}/generate`,
             {
                 method: "POST",
                 headers: {
@@ -44,11 +54,11 @@ async function generateTopic() {
             }
         );
 
-        if (!response.ok) {
-            throw new Error("Server error: " + response.status);
-        }
+        const data = await response.json().catch(() => ({}));
 
-        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.error || ("Server error: " + response.status));
+        }
 
         loading.style.display = "none";
         btn.disabled = false;
@@ -62,8 +72,8 @@ async function generateTopic() {
 
         result.innerHTML = `
             <div class="welcome-box">
-                ❌ Server tidak aktif / error koneksi.<br>
-                Pastikan backend Railway sedang berjalan.
+                ❌ Gagal memuat hasil.<br>
+                ${error.message || "Server tidak aktif / error koneksi."}
             </div>
         `;
     }

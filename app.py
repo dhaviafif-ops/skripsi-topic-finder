@@ -12,9 +12,7 @@ app = Flask(__name__)
 
 CORS(app)
 
-client = Groq(
-    api_key=os.getenv("GROQ_API_KEY")
-)
+MODEL = "openai/gpt-oss-120b"
 
 @app.route("/")
 def home():
@@ -23,11 +21,25 @@ def home():
 @app.route("/generate", methods=["POST"])
 def generate():
 
-    data = request.json
+    data = request.get_json(silent=True) or {}
 
-    major = data["major"]
+    major = (data.get("major") or "").strip()
 
-    interest = data["interest"]
+    interest = (data.get("interest") or "").strip()
+
+    if not major or not interest:
+
+        return jsonify({
+            "error": "Jurusan dan minat penelitian wajib diisi."
+        }), 400
+
+    api_key = os.getenv("GROQ_API_KEY")
+
+    if not api_key:
+
+        return jsonify({
+            "error": "GROQ_API_KEY belum di-set di server."
+        }), 500
 
     prompt = f"""
 Kamu adalah dosen pembimbing skripsi profesional.
@@ -53,18 +65,30 @@ Untuk setiap ide skripsi, berikan:
 Gunakan bahasa Indonesia yang jelas dan rapi.
 """
 
-    response = client.chat.completions.create(
+    try:
 
-        model="llama-3.1-8b-instant",
+        client = Groq(
+            api_key=api_key
+        )
 
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
+        response = client.chat.completions.create(
 
-    )
+            model=MODEL,
+
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
+
+        )
+
+    except Exception as e:
+
+        return jsonify({
+            "error": f"Gagal memanggil Groq: {e}"
+        }), 502
 
     result = response.choices[0].message.content
 
@@ -73,4 +97,8 @@ Gunakan bahasa Indonesia yang jelas dan rapi.
     })
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", "5000")),
+        debug=True
+    )
