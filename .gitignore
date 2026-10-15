@@ -1,2 +1,5 @@
 .env
 __pycache__/
+.wrangler/
+node_modules/
+.cloudflare_token

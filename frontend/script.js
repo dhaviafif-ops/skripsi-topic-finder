@@ -3,8 +3,8 @@
 // Backend saat dijalankan lokal (Flask: python app.py)
 const LOCAL_API = "http://127.0.0.1:5000/generate";
 
-// Backend online (Cloudflare Worker). Ganti dengan URL Worker kamu setelah deploy.
-const PROD_API = "https://GANTI-DENGAN-URL-WORKER.workers.dev/generate";
+// Backend online (Cloudflare Worker)
+const PROD_API = "https://skripsi-topic-finder.skripsi-topic-finder.workers.dev/generate";
 
 // Otomatis pilih: dibuka lokal -> LOCAL_API, dibuka online -> PROD_API
 const API_URL =
@@ -68,7 +68,11 @@ async function generateTopic() {
         loading.style.display = "none";
         btn.disabled = false;
 
-        typeWriter(data.result || "Tidak ada hasil.", result);
+        const clean = String(data.result || "Tidak ada hasil.")
+            .replace(/\*\*/g, "")
+            .replace(/^#{1,6}\s*/gm, "");
+
+        typeWriter(clean, result);
 
     } catch (error) {
 

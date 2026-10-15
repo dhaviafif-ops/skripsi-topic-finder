@@ -59,6 +59,17 @@ Tidak perlu mengisi API key. Kunci Groq disimpan aman di server, tidak terlihat 
 
 Frontend memanggil backend serverless yang menyimpan kunci Groq sebagai Secret. Kodenya ada di `cloudflare-worker.js`.
 
+Worker sudah ter-deploy di:
+`https://skripsi-topic-finder.skripsi-topic-finder.workers.dev`
+
+Untuk mengubah/men-deploy ulang (butuh login Cloudflare):
+
+```bash
+npx wrangler deploy
+npx wrangler secret put GROQ_API_KEY
+```
+
+Bila ingin membuat Worker baru dari nol:
 1. Buka https://dash.cloudflare.com -> **Workers & Pages** -> **Create** -> **Create Worker**.
 2. Beri nama (mis. `skripsi-topic-finder`), lalu **Deploy**.
 3. Klik **Edit code**, hapus isi bawaannya, tempel seluruh isi `cloudflare-worker.js`, lalu **Deploy**.
