@@ -50,38 +50,33 @@ python app.py
 
 ## Cara Pakai (Versi Online)
 
-Versi online **tidak memerlukan backend**. Halaman memanggil Groq AI langsung dari browser.
-
 1. Buka https://dhaviafif-ops.github.io/skripsi-topic-finder/frontend/
-2. Isi **Groq API Key** (format `gsk_...`). Dapatkan gratis di https://console.groq.com/keys
-3. Isi Jurusan dan Minat Penelitian, lalu klik **Generate Topic**.
+2. Isi Jurusan dan Minat Penelitian, lalu klik **Generate Topic**.
 
-API key hanya disimpan di browser (localStorage) dan hanya dikirim ke Groq.
+Tidak perlu mengisi API key. Kunci Groq disimpan aman di server, tidak terlihat di halaman publik.
 
-## Backend (Opsional)
+## Backend Serverless (Cloudflare Worker)
 
-Project juga menyertakan backend Flask (`app.py`) bila ingin memakai arsitektur server. Untuk memakainya, deploy ke hosting gratis, lalu ubah `GROQ_URL` di `frontend/script.js` agar menembak ke backend.
+Frontend memanggil backend serverless yang menyimpan kunci Groq sebagai Secret. Kodenya ada di `cloudflare-worker.js`.
 
-### Opsi A - Render (gratis, tanpa kartu kredit)
+1. Buka https://dash.cloudflare.com -> **Workers & Pages** -> **Create** -> **Create Worker**.
+2. Beri nama (mis. `skripsi-topic-finder`), lalu **Deploy**.
+3. Klik **Edit code**, hapus isi bawaannya, tempel seluruh isi `cloudflare-worker.js`, lalu **Deploy**.
+4. Buka **Settings** -> **Variables and Secrets** -> tambah:
+   - Nama: `GROQ_API_KEY`
+   - Nilai: kunci Groq milikmu
+   - Tipe: **Secret**
+5. Salin URL Worker (mis. `https://skripsi-topic-finder.namaakun.workers.dev`).
+6. Ganti nilai `PROD_API` di `frontend/script.js` menjadi `<URL Worker>/generate`, lalu push.
 
-1. Push project ini ke GitHub.
-2. Buka https://render.com -> **New** -> **Web Service** -> pilih repo ini.
-3. Isi konfigurasi:
-   - **Runtime**: Python
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn app:app`
-   - **Plan**: Free
-4. Tambah **Environment Variable**: `GROQ_API_KEY` = kunci Groq milikmu.
-5. Klik Deploy dan tunggu sampai mendapat URL, mis. `https://xxxx.onrender.com`.
+### Alternatif - Render / Railway (Flask)
 
-Catatan: plan Free Render akan "tidur" setelah ~15 menit tanpa akses. Request pertama setelah tidur bisa lambat 30-60 detik.
+Bila lebih suka backend Flask (`app.py`) di hosting gratis:
 
-### Opsi B - Railway
+- **Render**: New -> Web Service -> pilih repo; Runtime `Python`, Build `pip install -r requirements.txt`, Start `gunicorn app:app`, Plan `Free`, tambah env var `GROQ_API_KEY`.
+- **Railway**: buat project baru dari repo, set variable `GROQ_API_KEY`; `Procfile` sudah disiapkan (`web: gunicorn app:app`).
 
-1. Push project ini ke GitHub.
-2. Buat project baru di https://railway.app dari repo ini.
-3. Set variable `GROQ_API_KEY` di tab Variables.
-4. Railway otomatis memakai `Procfile` (`web: gunicorn app:app`).
+Lalu ubah `PROD_API` di `frontend/script.js` ke URL backend tersebut.
 
 ## Menjalankan Secara Lokal
 
@@ -92,7 +87,7 @@ cd frontend
 python -m http.server 5500
 ```
 
-Lalu buka `http://127.0.0.1:5500` dan isi Groq API Key.
+Lalu buka `http://127.0.0.1:5500`.
 
 Bila ingin menjalankan backend Flask juga:
 
