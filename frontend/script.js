@@ -1,12 +1,72 @@
-// Ganti PROD_API dengan URL backend setelah deploy (Render/Railway/hosting lain)
-const PROD_API = "https://skripsi-topic-finder-production.up.railway.app";
+/* ===== KONFIGURASI ===== */
 
-// Otomatis pilih backend: dibuka lokal -> localhost, dibuka online -> PROD_API
-const API_BASE =
-    location.protocol === "file:" ||
-    ["localhost", "127.0.0.1"].includes(location.hostname)
-        ? "http://127.0.0.1:5000"
-        : PROD_API;
+// Model Groq yang dipakai
+const GROQ_MODEL = "openai/gpt-oss-120b";
+
+// Endpoint chat Groq (dipanggil langsung dari browser, tanpa backend)
+const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+
+
+/* ===== API KEY (disimpan di browser, tidak dikirim ke mana pun selain Groq) ===== */
+
+function getApiKey() {
+
+    const input = document.getElementById("apiKey");
+
+    const fromInput = input ? input.value.trim() : "";
+
+    if (fromInput) {
+        localStorage.setItem("groq_api_key", fromInput);
+        return fromInput;
+    }
+
+    return localStorage.getItem("groq_api_key") || "";
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    const saved = localStorage.getItem("groq_api_key");
+
+    const input = document.getElementById("apiKey");
+
+    if (saved && input) {
+        input.value = saved;
+    }
+});
+
+
+/* ===== PROMPT ===== */
+
+function buildPrompt(major, interest) {
+
+    return `
+Kamu adalah dosen pembimbing skripsi profesional.
+
+Buatkan 3 ide skripsi terbaik.
+
+Data mahasiswa:
+
+Jurusan:
+${major}
+
+Minat penelitian:
+${interest}
+
+Untuk setiap ide skripsi, berikan:
+
+1. Judul Skripsi
+2. Research Gap
+3. Metode Penelitian
+4. Tools / Teknologi
+5. Tingkat Kesulitan
+
+Gunakan bahasa Indonesia yang jelas dan rapi.
+Tulis dalam bentuk teks biasa (plain text), tanpa tabel markdown dan tanpa simbol bintang (**).
+`;
+}
+
+
+/* ===== GENERATE ===== */
 
 async function generateTopic() {
 
@@ -26,6 +86,19 @@ async function generateTopic() {
         return;
     }
 
+    const apiKey = getApiKey();
+
+    if (!apiKey) {
+        result.innerHTML = `
+            <div class="welcome-box">
+                🔑 Masukkan <b>Groq API Key</b> dulu di kolom paling atas.<br>
+                Dapatkan gratis di
+                <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a>.
+            </div>
+        `;
+        return;
+    }
+
     loading.style.display = "block";
     btn.disabled = true;
 
@@ -40,30 +113,40 @@ async function generateTopic() {
 
     try {
 
-        const response = await fetch(
-            `${API_BASE}/generate`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    major: major,
-                    interest: interest
-                })
-            }
-        );
+        const response = await fetch(GROQ_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + apiKey
+            },
+            body: JSON.stringify({
+                model: GROQ_MODEL,
+                messages: [
+                    {
+                        role: "user",
+                        content: buildPrompt(major, interest)
+                    }
+                ]
+            })
+        });
 
         const data = await response.json().catch(() => ({}));
 
         if (!response.ok) {
-            throw new Error(data.error || ("Server error: " + response.status));
+            throw new Error(
+                (data.error && data.error.message) ||
+                ("Server error: " + response.status)
+            );
         }
 
         loading.style.display = "none";
         btn.disabled = false;
 
-        typeWriter(data.result, result);
+        const text =
+            (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) ||
+            "Tidak ada hasil.";
+
+        typeWriter(text, result);
 
     } catch (error) {
 
@@ -73,7 +156,7 @@ async function generateTopic() {
         result.innerHTML = `
             <div class="welcome-box">
                 ❌ Gagal memuat hasil.<br>
-                ${error.message || "Server tidak aktif / error koneksi."}
+                ${error.message || "Terjadi kesalahan."}
             </div>
         `;
     }
