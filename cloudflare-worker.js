@@ -4,11 +4,20 @@
  * API key Groq disimpan sebagai Secret di Cloudflare (env.GROQ_API_KEY),
  * jadi key TIDAK pernah terlihat di halaman publik.
  *
- * Cara deploy: lihat README bagian "Backend Serverless (Cloudflare Worker)".
+ * Kalau model pertama tidak tersedia di Groq, otomatis dicoba model berikutnya.
+ *
+ * Deploy: npx wrangler deploy
  */
 
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const MODEL = "openai/gpt-oss-120b";
+
+// Daftar model, dicoba berurutan sampai ada yang berhasil.
+const MODELS = [
+    "openai/gpt-oss-120b",
+    "openai/gpt-oss-20b",
+    "qwen/qwen3.8-27b",
+    "allam-2-7b"
+];
 
 const CORS = {
     "Access-Control-Allow-Origin": "*",
@@ -81,40 +90,47 @@ export default {
             return json({ error: "GROQ_API_KEY belum di-set di server." }, 500);
         }
 
-        try {
+        let lastError = "Semua model tidak tersedia.";
 
-            const response = await fetch(GROQ_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + apiKey
-                },
-                body: JSON.stringify({
-                    model: MODEL,
-                    messages: [
-                        {
-                            role: "user",
-                            content: buildPrompt(major, interest)
-                        }
-                    ]
-                })
-            });
+        for (const model of MODELS) {
 
-            const result = await response.json();
+            try {
 
-            if (!response.ok) {
+                const response = await fetch(GROQ_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + apiKey
+                    },
+                    body: JSON.stringify({
+                        model: model,
+                        messages: [
+                            {
+                                role: "user",
+                                content: buildPrompt(major, interest)
+                            }
+                        ]
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    lastError = (result.error && result.error.message) || ("Groq error: " + response.status);
+                    continue;
+                }
+
                 return json({
-                    error: (result.error && result.error.message) || ("Groq error: " + response.status)
-                }, 502);
+                    result: result.choices[0].message.content,
+                    model: model
+                }, 200);
+
+            } catch (error) {
+
+                lastError = "Gagal memanggil Groq: " + error.message;
             }
-
-            return json({
-                result: result.choices[0].message.content
-            }, 200);
-
-        } catch (error) {
-
-            return json({ error: "Gagal memanggil Groq: " + error.message }, 502);
         }
+
+        return json({ error: lastError }, 502);
     }
 };
